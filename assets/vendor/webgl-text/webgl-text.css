@@ -1,0 +1,84 @@
+/* Canvas-based text effect styles */
+@font-face {
+  font-family: 'Humane';
+  src: url('/assets/fonts/humane/Humane-Thin.woff2') format('woff2'),
+       url('/assets/fonts/humane/Humane-Thin.woff') format('woff'),
+       url('/assets/fonts/humane/Humane-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Humane';
+  src: url('/assets/fonts/humane/Humane-Bold.woff2') format('woff2'),
+       url('/assets/fonts/humane/Humane-Bold.woff') format('woff'),
+       url('/assets/fonts/humane/Humane-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Humane';
+  src: url('/assets/fonts/humane/Humane-Regular.woff2') format('woff2'),
+       url('/assets/fonts/humane/Humane-Regular.woff') format('woff'),
+       url('/assets/fonts/humane/Humane-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Make the canvas fill the viewport and keep source text out of layout flow */
+.webgl-text-root{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;max-height:100vh;box-sizing:border-box}
+.webgl-text-canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.webgl-text-source{
+  /* Keep the source text in-flow for accurate computed styles, but hide it visually.
+     This makes it selectable (allowing copy) and ensures canvas reads the real font sizes. */
+  position:relative;
+  width:auto;
+  height:auto;
+  padding:0;
+  margin:0;
+  overflow:visible;
+  white-space:normal;
+  border:0;
+  color:transparent; /* visually invisible but still selectable */
+  -webkit-text-fill-color:transparent;
+  text-shadow:none;
+  user-select:text;
+  -webkit-user-select:text;
+  font-family: 'Humane', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight:700;
+  text-transform:uppercase;
+  -webkit-font-smoothing:antialiased;
+}
+/* make visible (but transparent) source text very large so canvas can match its size */
+h1.webgl-text-source{font-size:10rem;line-height:0.9;margin:0}
+.webgl-text-root .subheading.webgl-text-source{font-size:4.8rem;margin-top:0.5rem;font-weight:100;line-height:1}
+/* fallback visible text when JS disabled */
+.no-webgl .webgl-text-source{color:#f4bbff}
+
+/* sizing helpers for masthead */
+/* make masthead fill viewport so the canvas text can be very large */
+.masthead{min-height:100vh;display:flex;align-items:center;position:relative}
+.masthead .page-heading{width:100%}
+.masthead .webgl-text-root .subheading:not(.webgl-text-source){font-size:1.5rem;margin-top:0.5rem}
+/* Ensure the canvas doesn't cause the body to overflow on mobile */
+html,body{height:100%}
+header.masthead{overflow:hidden}
+/* ensure overlay content sits above the canvas */
+.header-overlay-content{position:relative;z-index:2}
+/* visually hide the original fallback heading so it doesn't display over the canvas;
+   the accessible text for screen readers remains in `.webgl-text-source`. */
+.header-overlay-content .page-heading{
+  position:absolute !important;
+  width:1px !important;
+  height:1px !important;
+  padding:0 !important;
+  margin:-1px !important;
+  overflow:hidden !important;
+  clip:rect(0 0 0 0) !important;
+  white-space:nowrap !important;
+  border:0 !important;
+}
+@media(min-width:768px){
+  .masthead .page-heading h1{font-size:6rem}
+}

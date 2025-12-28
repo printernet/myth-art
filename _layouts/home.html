@@ -3,25 +3,30 @@ layout: default
 ---
 
 <!-- Page Header -->
-{% if page.background %}
-<header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
-  {% else %}
-  <header class="masthead">
+<header class="masthead" {% if page.background %}style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')"{% endif %}>
+  <div class="overlay"></div>
+  <!-- Fullscreen canvas/text root -->
+  <div class="webgl-text-root" role="banner" aria-label="Site title visual">
+    <h1 class="webgl-text-source">{{ site.title }}</h1>
+    {% if site.description %}
+    <div class="subheading webgl-text-source">{{ site.description }}</div>
     {% endif %}
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="page-heading">
-            <h1>{{ site.title }}</h1>
-            {% if site.description %}
-            <span class="subheading">{{ site.description }}</span>
-            {% endif %}
-          </div>
+  </div>
+  <!-- Keep a content container for CTAs or overlays (not constraining the canvas) -->
+  <div class="container header-overlay-content">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="page-heading" aria-hidden="true">
+          <!-- original markup kept for accessibility and fallback -->
+          <h1>{{ site.title }}</h1>
+          {% if site.description %}
+          <span class="subheading">{{ site.description }}</span>
+          {% endif %}
         </div>
       </div>
     </div>
-  </header>
+  </div>
+</header>
 
   <div class="container">
     <div class="row">
