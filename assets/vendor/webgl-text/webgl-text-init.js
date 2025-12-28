@@ -116,8 +116,8 @@
       document.documentElement.classList.add('no-webgl');
       return;
     }
-    // find masthead containers
-    var roots = document.querySelectorAll('.webgl-text-root');
+    // find roots but exclude scroll-variant ones (scroll-variant handled by webgl-text-scroll.js)
+    var roots = document.querySelectorAll('.webgl-text-root:not(.scroll-variant)');
     roots.forEach(function(r){ initForContainer(r); });
   }
 
