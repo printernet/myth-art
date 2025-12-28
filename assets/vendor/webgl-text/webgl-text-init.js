@@ -8,7 +8,7 @@
   }
 
   function initForContainer(container){
-    var sources = container.querySelectorAll('.webgl-text-source');
+    var sources = container.querySelectorAll('.webgl-source');
     if(!sources.length) return;
     var canvas = document.createElement('canvas');
     canvas.className = 'webgl-text-canvas';

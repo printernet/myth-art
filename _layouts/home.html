@@ -5,23 +5,19 @@ layout: default
 <!-- Page Header -->
 <header class="masthead" {% if page.background %}style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')"{% endif %}>
   <div class="overlay"></div>
-  <!-- Fullscreen canvas/text root -->
-  <div class="webgl-text-root" role="banner" aria-label="Site title visual">
-    <h1 class="webgl-text-source">{{ site.title }}</h1>
-    {% if site.description %}
-    <div class="subheading webgl-text-source">{{ site.description }}</div>
-    {% endif %}
-  </div>
+  <!-- Canvas/text root will be wrapped around the original heading markup below; JS will read from the original elements marked with `.webgl-source`. -->
   <!-- Keep a content container for CTAs or overlays (not constraining the canvas) -->
   <div class="container header-overlay-content">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="page-heading" aria-hidden="true">
-          <!-- original markup kept for accessibility and fallback -->
-          <h1>{{ site.title }}</h1>
-          {% if site.description %}
-          <span class="subheading">{{ site.description }}</span>
-          {% endif %}
+        <div class="page-heading">
+          <!-- ORIGINAL MARKUP: single source of truth for both accessibility and canvas rendering -->
+          <span class="webgl-text-root">
+            <h1 class="webgl-source">{{ site.title }}</h1>
+            {% if site.description %}
+            <span class="subheading webgl-source">{{ site.description }}</span>
+            {% endif %}
+          </span>
         </div>
       </div>
     </div>
