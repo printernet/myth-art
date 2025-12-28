@@ -12,12 +12,12 @@ layout: default
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="page-heading">
           <!-- ORIGINAL MARKUP: single source of truth for both accessibility and canvas rendering -->
-          <span class="webgl-text-root">
+          <div class="webgl-text-root block" role="banner" aria-label="Site title visual">
             <h1 class="webgl-source">{{ site.title }}</h1>
             {% if site.description %}
             <span class="subheading webgl-source">{{ site.description }}</span>
             {% endif %}
-          </span>
+          </div>
         </div>
       </div>
     </div>
