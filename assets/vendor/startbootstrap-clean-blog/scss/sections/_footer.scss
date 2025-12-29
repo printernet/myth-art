@@ -1,15 +1,81 @@
 // Styling for the footer
 footer {
-    padding: 50px 0 65px;
+    padding: 40px 0;
+    background-color: #000000;
+    color: #ffffff;
+    text-shadow: none;
+    margin-top: 80px;
 
-    .list-inline {
-        margin: 0;
-        padding: 0;
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    .footer-button {
+        flex: 0 0 auto;
+        
+        .footer-inquiries-link {
+            display: block;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+            
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+        
+        .webgl-text-root {
+            h2.webgl-source {
+                font-size: 4rem;
+                margin: 0;
+            }
+        }
     }
 
     .copyright {
+        flex: 1 1 auto;
         font-size: 14px;
-        margin-bottom: 0;
-        text-align: center;
+        margin: 0;
+        color: #000000;
+        text-shadow: none;
+        
+        .webgl-text-root {
+            width: 100%;
+            height: auto;
+            
+            p.subheading.webgl-source {
+                font-size: 8rem !important;
+                line-height: 1;
+                margin: 0;
+            }
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .footer-button .webgl-text-root h2.webgl-source {
+            font-size: 3rem;
+        }
+        
+        .copyright {
+            width: 100%;
+            
+            .webgl-text-root {
+                &.text-right {
+                    text-align: center;
+                }
+                
+                p.subheading.webgl-source {
+                    font-size: 4rem !important;
+                }
+            }
+        }
     }
 }

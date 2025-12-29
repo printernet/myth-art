@@ -127,7 +127,13 @@
       tctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
       tctx.textBaseline = "middle";
       tctx.fillStyle = "#f4bbff";
-      tctx.textAlign = "center";
+      
+      // Check if root has text-right class for alignment
+      // On mobile (width < 768px), center align even if text-right class exists
+      var isMobile = window.innerWidth < 768;
+      var isRightAligned = root.classList.contains('text-right') && !isMobile;
+      tctx.textAlign = isRightAligned ? "right" : "center";
+      
       var y = 0;
       var startY = (textCanvas.height - totalH) / 2;
       lines.forEach(function (line) {
@@ -136,7 +142,7 @@
           " " +
           line.fontSize +
           'px "Humane", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
-        var x = textCanvas.width / 2;
+        var x = isRightAligned ? textCanvas.width - 10 * DPR : textCanvas.width / 2;
         y = startY + line.fontSize / 2;
         tctx.fillText(line.text.toUpperCase(), x, y);
         startY += line.fontSize + gap;
