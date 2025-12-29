@@ -54,7 +54,7 @@
 .webgl-source{ }
 h1.webgl-source{font-size:20rem;line-height:0.9;margin:0}
 .webgl-text-root h1.webgl-source{font-size:40rem;line-height:0.9;margin:0}
-.webgl-text-root .subheading.webgl-source{font-size:19.2rem;margin-top:0.5rem;font-weight:100;line-height:1}
+.webgl-text-root .subheading.webgl-source{font-size:38.4rem;margin-top:0.5rem;font-weight:100;line-height:1}
 /* fallback visible text when JS disabled */
 .no-webgl .webgl-source{color:#f4bbff}
 

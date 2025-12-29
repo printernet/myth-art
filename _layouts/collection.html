@@ -1,0 +1,15 @@
+---
+layout: page
+---
+
+<header class="collection-header" style="background-image: url('{{ page.header_image | default: '' }}')">
+  <div class="overlay"></div>
+  <div class="container">
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+  </div>
+</header>
+
+<div class="container collection-content">
+  {{ content }}
+</div>

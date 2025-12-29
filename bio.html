@@ -1,0 +1,15 @@
+
+---
+background: /img/hero/shawn-holley-02.jpg
+layout: page
+title: "Bio"
+permalink: /bio/
+---
+
+{% capture bio_content %}
+{% include_relative ../docs/bio.md %}
+{% endcapture %}
+
+<div class="bio-content">
+  {{ bio_content | markdownify }}
+</div>
