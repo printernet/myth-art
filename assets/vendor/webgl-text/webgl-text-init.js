@@ -33,15 +33,22 @@
       var gap = 10;
       var lines = [];
       var totalHeight = 0;
+      // Check if this is a green-variant container to apply custom pink typography
+      var isGreenVariant = container.classList.contains('green-variant');
       sources.forEach(function (el, i) {
         var txt = el.textContent.trim().toUpperCase();
         var cssSize = parseFloat(window.getComputedStyle(el).fontSize) || 0;
+        // Apply custom sizing for pink text on green-variant (2x bigger)
+        if (isGreenVariant) {
+          cssSize = cssSize * 2.0;
+        }
         var calcSize = Math.min(
           rect.height * 0.95,
           Math.max(28, rect.width / Math.max(3, txt.length))
         );
         var fontSize = cssSize > 0 ? cssSize : calcSize;
-        var cssWeight = window.getComputedStyle(el).fontWeight || "700";
+        // Use thin weight (100) for pink text on green-variant, otherwise use CSS weight
+        var cssWeight = isGreenVariant ? '100' : (window.getComputedStyle(el).fontWeight || "700");
         var fontWeight = /^\d+$/.test(cssWeight)
           ? cssWeight
           : cssWeight.toLowerCase() === "bold"
@@ -58,6 +65,7 @@
           fontSize: fontSize,
           metrics: metrics,
           fontWeight: fontWeight,
+          letterSpacing: isGreenVariant ? fontSize * 0.15 : 0 // wider kerning on green-variant
         });
         totalHeight += fontSize + gap;
       });
@@ -96,6 +104,7 @@
         var fontSize = line.fontSize;
         var txt = line.text;
         var fw = line.fontWeight || "700";
+        var letterSpacing = line.letterSpacing || 0;
         ctx.font =
           fw +
           " " +
@@ -118,7 +127,7 @@
           ctx.translate(-cx, 0);
           ctx.fillText(ch, x + offset, y + sway);
           ctx.restore();
-          offset += w;
+          offset += w + letterSpacing;
         }
         yOffset += fontSize + gap;
       });
@@ -144,9 +153,9 @@
       document.documentElement.classList.add("no-webgl");
       return;
     }
-    // find roots but exclude scroll-variant ones (scroll-variant handled by webgl-text-scroll.js)
+    // find roots but exclude scroll-variant and green-variant (handled by their own scripts)
     var roots = document.querySelectorAll(
-      ".webgl-text-root:not(.scroll-variant)"
+      ".webgl-text-root:not(.scroll-variant):not(.green-variant)"
     );
     roots.forEach(function (r) {
       initForContainer(r);

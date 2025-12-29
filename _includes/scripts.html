@@ -6,8 +6,12 @@
 
 <!-- WebGL/text-effect initializer (canvas-based fallback) -->
 <script src="{{"/assets/vendor/webgl-text/webgl-text-init.js" | relative_url }}"></script>
-<!-- Scroll-variant WebGL shader effect (wiggle only when scrolling) -->
+<!-- Scroll-variant WebGL shader effect (pink, wiggle only when scrolling) -->
 <script src="{{"/assets/vendor/webgl-text/webgl-text-scroll.js" | relative_url }}"></script>
+<!-- Green-variant WebGL shader effect (green, always wavy, random RGB bursts) -->
+<script src="{{"/assets/vendor/webgl-text/webgl-text-green.js" | relative_url }}"></script>
+<!-- Pink RGB overlay for green-variant (continuous RGB shift) -->
+<script src="{{"/assets/vendor/webgl-text/webgl-text-pink-rgb.js" | relative_url }}"></script>
 
 {% if page.url contains 'contact' %}
   <!-- Form Validation -->
