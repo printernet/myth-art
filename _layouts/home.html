@@ -3,7 +3,9 @@ layout: default
 ---
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('/img/hero/shawn-holley-07.jpg')">
+<header
+  class="masthead"
+  style="background-image: url('/img/hero/shawn-holley-07.jpg')">
   <div class="overlay"></div>
   <!-- Canvas/text root will be wrapped around the original heading markup below; JS will read from the original elements marked with `.webgl-source`. -->
   <!-- Keep a content container for CTAs or overlays (not constraining the canvas) -->
@@ -12,10 +14,17 @@ layout: default
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="page-heading">
           <!-- ORIGINAL MARKUP: single source of truth for both accessibility and canvas rendering -->
-          <div class="webgl-text-root block scroll-variant" role="banner" aria-label="Site title visual">
+          <div
+            class="webgl-text-root block scroll-variant"
+            role="banner"
+            aria-label="Site title visual">
             <h1 class="webgl-source">{{ site.title }}</h1>
             {% if site.description %}
-            <span class="subheading webgl-source" style="font-size:5rem;line-height:0.6">{{ site.description }}</span>
+            <span
+              class="subheading webgl-source"
+              style="font-size: 5rem; line-height: 0.6"
+              >{{ site.description }}</span
+            >
             {% endif %}
           </div>
         </div>
@@ -24,44 +33,8 @@ layout: default
   </div>
 </header>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-
-        {{ content }}
-
-        <!-- Home Post List -->
-        {% for post in site.posts limit : 5 %}
-
-        <article class="post-preview">
-          <a href="{{ post.url | prepend: site.baseurl | replace: '//', '/' }}">
-            <h2 class="post-title">{{ post.title }}</h2>
-            {% if post.subtitle %}
-            <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-            {% else %}
-            <h3 class="post-subtitle">{{ post.excerpt | strip_html | truncatewords: 15 }}</h3>
-            {% endif %}
-          </a>
-          <p class="post-meta">Posted by
-            {% if post.author %}
-            {{ post.author }}
-            {% else %}
-            {{ site.author }}
-            {% endif %}
-            on
-            {{ post.date | date: '%B %d, %Y' }} &middot; {% include read_time.html content=post.content %}            
-          </p>
-        </article>
-
-        <hr>
-
-        {% endfor %}
-
-        <!-- Pager -->
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{"/posts" | relative_url }}">View All Posts &rarr;</a>
-        </div>
-
-      </div>
-    </div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">{{ content }}</div>
   </div>
+</div>
