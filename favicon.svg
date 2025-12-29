@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Pink top-left square -->
+  <rect x="0" y="0" width="16" height="16" fill="#f4bbff"/>
+  <!-- Black top-right square -->
+  <rect x="16" y="0" width="16" height="16" fill="#000000"/>
+  <!-- Black bottom-left square -->
+  <rect x="0" y="16" width="16" height="16" fill="#000000"/>
+  <!-- Pink bottom-right square -->
+  <rect x="16" y="16" width="16" height="16" fill="#f4bbff"/>
+</svg>
