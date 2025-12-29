@@ -10,12 +10,13 @@ footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         gap: 20px;
     }
     
     .footer-button {
         flex: 0 0 auto;
+        min-width: 0;
         
         .footer-inquiries-link {
             display: block;
@@ -41,6 +42,7 @@ footer {
         margin: 0;
         color: #000000;
         text-shadow: none;
+        min-width: 0;
         
         .webgl-text-root {
             width: 100%;
@@ -54,18 +56,48 @@ footer {
         }
     }
     
-    @media (max-width: 768px) {
-        .footer-content {
-            flex-direction: column;
-            text-align: center;
+    // Scale down at tablet sizes to keep horizontal layout
+    @media (max-width: 1200px) {
+        .footer-button .webgl-text-root h2.webgl-source {
+            font-size: 3.5rem;
         }
         
+        .copyright .webgl-text-root p.subheading.webgl-source {
+            font-size: 6.5rem !important;
+        }
+    }
+    
+    @media (max-width: 992px) {
         .footer-button .webgl-text-root h2.webgl-source {
             font-size: 3rem;
         }
         
+        .copyright .webgl-text-root p.subheading.webgl-source {
+            font-size: 5rem !important;
+        }
+    }
+    
+    // Only stack at true mobile widths
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-button {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            
+            .webgl-text-root h2.webgl-source {
+                font-size: 2.5rem;
+            }
+        }
+        
         .copyright {
             width: 100%;
+            display: flex;
+            justify-content: center;
             
             .webgl-text-root {
                 &.text-right {

@@ -14,9 +14,51 @@
     .navbar-toggler {
         font-size: 12px;
         font-weight: 800;
-        padding: 13px;
+        padding: 20px;
         text-transform: uppercase;
         color: $gray-800;
+        border: none;
+        background: transparent;
+        overflow: visible;
+        
+        .hamburger-icon {
+            display: block;
+            transition: transform 0.3s ease;
+            overflow: visible;
+            
+            .bun-top,
+            .lettuce,
+            .beef,
+            .bun-bottom {
+                transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+        }
+        
+        &:focus {
+            outline: none;
+        }
+        
+        &:not(.collapsed) .hamburger-icon {
+            .bun-top {
+                transform: translate(-8px, 10px) rotate(-45deg);
+                opacity: 0.7;
+            }
+            
+            .lettuce {
+                transform: translate(15px, -5px) rotate(25deg);
+                opacity: 0.6;
+            }
+            
+            .beef {
+                transform: translate(-12px, 3px) rotate(-30deg);
+                opacity: 0.8;
+            }
+            
+            .bun-bottom {
+                transform: translate(10px, -8px) rotate(35deg);
+                opacity: 0.7;
+            }
+        }
     }
 
     .navbar-nav {
