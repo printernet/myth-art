@@ -1,8 +1,12 @@
 // Global styling for this template
 body {
-    font-size: 20px;
-    color: $gray-900;
-    background-color: #000000;
+    font-size: 24px;
+    color: #000000;
+    background-color: #f4bbff;
+    font-family: 'Nunito', sans-serif;
+    text-shadow: -2px 2px 0 #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 p {
@@ -55,15 +59,15 @@ blockquote {
 }
 
 ::-moz-selection {
-    color: $white;
-    background: $primary;
-    text-shadow: none;
+    color: #000000;
+    background: #2CFF05;
+    text-shadow: -2px 2px 0 #ffffff;
 }
 
 ::selection {
-    color: $white;
-    background: $primary;
-    text-shadow: none;
+    color: #000000;
+    background: #2CFF05;
+    text-shadow: -2px 2px 0 #ffffff;
 }
 
 img::selection {

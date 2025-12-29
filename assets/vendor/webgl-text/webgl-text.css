@@ -57,7 +57,9 @@
 /* make visible (but transparent) source text very large so canvas can match its size */
 .webgl-source{ }
 h1.webgl-source{font-size:20rem;line-height:0.9;margin:0}
+h2.webgl-source{font-size:10rem;line-height:0.9;margin:0;display:block}
 .webgl-text-root h1.webgl-source{font-size:40rem;line-height:0.9;margin:0}
+.webgl-text-root-rgb h2.webgl-source{font-size:10rem;line-height:0.9;margin:0;display:block}
 .webgl-text-root .subheading.webgl-source{font-size:38.4rem;margin-top:0.5rem;font-weight:100;line-height:1}
 /* fallback visible text when JS disabled */
 .no-webgl .webgl-source{color:#f4bbff}
@@ -87,6 +89,8 @@ header.masthead{overflow:hidden}
 .header-overlay-content{position:relative;z-index:2}
 /* block variant for roots used inside the masthead */
 .webgl-text-root.block{position:relative;left:auto;top:auto;width:100%;display:block;overflow:visible}
+/* RGB variant for custom implementations */
+.webgl-text-root-rgb{position:relative;display:block;width:100%;height:auto;overflow:visible}
 @media(min-width:768px){
   .masthead .page-heading h1{font-size:6rem}
 }

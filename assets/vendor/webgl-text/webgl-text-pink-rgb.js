@@ -107,51 +107,81 @@
     function renderTextToCanvas() {
       var DPR = window.devicePixelRatio || 1;
       var rect = root.getBoundingClientRect();
-      var width = Math.max(64, Math.floor(rect.width * DPR));
       var lines = [];
       var gap = 6 * DPR;
       var totalH = 0;
+      var margin = 10 * DPR; // 10px margin on all sides for safety
+      
+      // Calculate dimensions
       sources.forEach(function (el) {
         var txt = (el.textContent || "").trim();
         var cs = getComputedStyle(el);
         var fs = parseFloat(cs.fontSize) || 48;
-        // Apply 2x scaling and thin weight
         fs = fs * 2.0;
-        var fw = "100"; // Thin weight
+        var fw = "100";
         lines.push({ text: txt, fontSize: fs * DPR, fontWeight: fw });
         totalH += fs * DPR + gap;
       });
       if (lines.length) totalH -= gap;
-      textCanvas.width = width;
-      textCanvas.height = Math.max(32, Math.ceil(totalH));
-      tctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
-      tctx.textBaseline = "middle";
-      tctx.fillStyle = "#f4bbff"; // Pink
-      tctx.textAlign = "center";
-      var y = 0;
-      var startY = (textCanvas.height - totalH) / 2;
+      
+      // Use container width constrained by parent
+      var width = Math.max(64, Math.floor(rect.width * DPR));
+      
+      // Calculate natural text width and scale factor
+      var maxNaturalWidth = 0;
       lines.forEach(function (line) {
         tctx.font =
           line.fontWeight +
           " " +
           line.fontSize +
           'px "Humane", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
-        var x = textCanvas.width / 2;
-        y = startY + line.fontSize / 2;
-        // Apply letter spacing by drawing character by character
         var letterSpacing = line.fontSize * 0.15;
-        var chars = line.text.toUpperCase().split('');
+        var chars = line.text.toUpperCase().split("");
+        var lineWidth = 0;
+        chars.forEach(function (ch) {
+          lineWidth += tctx.measureText(ch).width + letterSpacing;
+        });
+        lineWidth -= letterSpacing;
+        // Add extra padding to account for any measurement inaccuracies
+        lineWidth += letterSpacing * 2;
+        maxNaturalWidth = Math.max(maxNaturalWidth, lineWidth);
+      });
+      
+      // Calculate scale to fit within canvas with margins
+      var availableWidth = width - (margin * 2);
+      var scale = maxNaturalWidth > availableWidth ? availableWidth / maxNaturalWidth : 1.0;
+      
+      textCanvas.width = width;
+      textCanvas.height = Math.max(32, Math.ceil(totalH * scale + margin * 2));
+      tctx.clearRect(0, 0, textCanvas.width, textCanvas.height);
+      tctx.textBaseline = "middle";
+      tctx.fillStyle = "#f4bbff";
+      tctx.textAlign = "center";
+      var startY = margin + (textCanvas.height - (totalH * scale + margin * 2)) / 2;
+      
+      lines.forEach(function (line) {
+        var scaledFontSize = line.fontSize * scale;
+        tctx.font =
+          line.fontWeight +
+          " " +
+          scaledFontSize +
+          'px "Humane", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+        // Center within available width (accounting for margins)
+        var x = margin + availableWidth / 2;
+        var y = startY + scaledFontSize / 2;
+        var letterSpacing = scaledFontSize * 0.15;
+        var chars = line.text.toUpperCase().split("");
         var totalWidth = 0;
-        chars.forEach(function(ch) {
+        chars.forEach(function (ch) {
           totalWidth += tctx.measureText(ch).width + letterSpacing;
         });
-        totalWidth -= letterSpacing; // Remove last spacing
+        totalWidth -= letterSpacing;
         var xOffset = -(totalWidth / 2);
-        chars.forEach(function(ch) {
+        chars.forEach(function (ch) {
           tctx.fillText(ch, x + xOffset, y);
           xOffset += tctx.measureText(ch).width + letterSpacing;
         });
-        startY += line.fontSize + gap;
+        startY += scaledFontSize + gap * scale;
       });
     }
 
@@ -182,7 +212,7 @@
       now = now || performance.now();
       var dt = (now - then) * 0.001;
       then = now;
-// Calculate RGB intensity: fade from 0 to 1 over 40 seconds (20s up, 20s down)
+      // Calculate RGB intensity: fade from 0 to 1 over 40 seconds (20s up, 20s down)
       var cycleTime = 40.0; // 40 second full cycle
       var phase = (now * 0.001) % cycleTime; // Current position in cycle
       var normalizedPhase = phase / cycleTime; // 0 to 1
@@ -204,7 +234,7 @@
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.useProgram(program);
       gl.uniform1f(timeLoc, now * 0.001);
-      gl.uniform1f(rgbIntensityLoc, intensity
+      gl.uniform1f(rgbIntensityLoc, intensity);
       gl.uniform1f(timeLoc, now * 0.001);
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, tex);
@@ -218,7 +248,7 @@
 
   function init() {
     if (!supportsWebGL()) return;
-    var roots = document.querySelectorAll(".webgl-text-root.green-variant");
+    var roots = document.querySelectorAll(".webgl-text-root-rgb");
     roots.forEach(function (r) {
       try {
         initRoot(r);
