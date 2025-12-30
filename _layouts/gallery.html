@@ -65,7 +65,8 @@ layout: default
               class="glightbox gallery-item"
               data-gallery="collection"
               data-title="{{ image.title }}"
-              data-description="{{ image.description }}">
+              data-description="{{ image.description }}"
+              data-sold="{% if image.sold %}true{% else %}false{% endif %}">
               <img
                 src="{{ image.url }}"
                 alt="{{ image.title }}"
@@ -131,12 +132,66 @@ layout: default
   <!-- GLightbox JS -->
   <script src="{{ '/assets/vendor/glightbox.min.js' | relative_url }}"></script>
   <script>
+    function addBadgeOrButton(slideNode, isSold) {
+      // Remove any existing badges/buttons
+      const existingBadge = slideNode.querySelector('.lightbox-sold-badge');
+      const existingButton = slideNode.querySelector('.lightbox-own-button');
+      if (existingBadge) existingBadge.remove();
+      if (existingButton) existingButton.remove();
+      
+      // Find the image container
+      const imageContainer = slideNode.querySelector('.gslide-inner-content');
+      if (!imageContainer) return;
+      
+      if (isSold) {
+        // Add SOLD badge
+        const soldBadge = document.createElement('div');
+        soldBadge.className = 'lightbox-sold-badge';
+        soldBadge.textContent = 'SOLD';
+        imageContainer.appendChild(soldBadge);
+      } else {
+        // Add "Own this" button
+        const ownButton = document.createElement('a');
+        ownButton.className = 'lightbox-own-button';
+        ownButton.href = '/contact.html';
+        ownButton.textContent = 'Own this';
+        imageContainer.appendChild(ownButton);
+      }
+    }
+    
     const lightbox = GLightbox({
       touchNavigation: true,
       loop: true,
       autoplayVideos: true,
       zoomable: true,
       draggable: true,
+      onSlideChange: function({ prev, current }) {
+        // Get the original element that was clicked
+        const originalElement = document.querySelectorAll('.glightbox')[current.index];
+        const isSold = originalElement.getAttribute('data-sold') === 'true';
+        
+        // Wait for slide to be rendered
+        setTimeout(() => {
+          const slideNode = document.querySelector('.gslide.current');
+          if (slideNode) {
+            addBadgeOrButton(slideNode, isSold);
+          }
+        }, 100);
+      },
+      onOpen: function() {
+        // Handle initial slide when lightbox opens
+        setTimeout(() => {
+          const currentSlide = lightbox.activeSlide;
+          if (currentSlide !== null) {
+            const originalElement = document.querySelectorAll('.glightbox')[currentSlide];
+            const isSold = originalElement.getAttribute('data-sold') === 'true';
+            const slideNode = document.querySelector('.gslide.current');
+            if (slideNode) {
+              addBadgeOrButton(slideNode, isSold);
+            }
+          }
+        }, 100);
+      }
     });
   </script>
 
@@ -191,6 +246,50 @@ layout: default
       font-weight: bold;
       border-radius: 4px;
       text-shadow: none;
+    }
+    
+    /* Lightbox SOLD badge */
+    .lightbox-sold-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #df00fe;
+      color: #fff;
+      padding: 10px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 6px;
+      text-shadow: none;
+      z-index: 10000;
+    }
+    
+    /* Lightbox "Own this" button */
+    .lightbox-own-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2CFF05;
+      color: #000;
+      padding: 12px 40px;
+      font-size: 18px;
+      font-weight: bold;
+      font-family: 'Humane', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 6px;
+      text-shadow: none;
+      text-decoration: none;
+      z-index: 10000;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(44, 255, 5, 0.4);
+    }
+    
+    .lightbox-own-button:hover {
+      background: #f4bbff;
+      color: #000;
+      transform: translateX(-50%) translateY(-3px);
+      box-shadow: 0 6px 20px rgba(244, 187, 255, 0.6);
     }
 
     @media (max-width: 768px) {
