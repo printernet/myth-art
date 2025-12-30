@@ -2,7 +2,7 @@
 layout: gallery
 title: "Past Works"
 description: "Archive of earlier creations"
-background: '/img/hero/shawn-holley-01.jpg'
+background: "/img/hero/shawn-holley-01.jpg"
 permalink: /collections/past-works/
 images:
   - url: /img/collections/past-works/Past Works 1.jpeg

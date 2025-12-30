@@ -12,3 +12,12 @@
     padding: 0.25rem 0.25rem !important;
   }
 }
+
+// Past Works collection - flip background horizontally
+.masthead.past-works-collection {
+  transform: scaleX(-1);
+}
+
+.masthead.past-works-collection > * {
+  transform: scaleX(-1);
+}

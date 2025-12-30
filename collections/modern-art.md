@@ -2,7 +2,7 @@
 layout: gallery
 title: "Modern Art"
 description: "Pop culture meets raw expression"
-background: '/img/hero/shawn-holley-05.jpg'
+background: "/img/hero/shawn-holley-10.jpg"
 permalink: /collections/modern-art/
 images:
   - url: /img/collections/modern-art/C is for Celebrity. Spray Paint. 18x24 $3,000.jpeg
