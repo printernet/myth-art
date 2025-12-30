@@ -218,23 +218,25 @@ layout: default
     .collection-nav-btn {
       display: inline-flex;
       align-items: center;
-      gap: 15px;
-      padding: 20px 40px;
+      justify-content: center;
+      gap: 10px;
+      padding: 0;
+      height: 116px;
+      width: 100%;
+      max-width: 350px;
       background: #000;
       border: 3px solid #2CFF05;
       color: #2CFF05;
       text-decoration: none;
       font-family: 'Humane', sans-serif;
-      font-weight: 100;
-      font-size: 1.5rem;
-      letter-spacing: 0.1em;
+      font-weight: 400;
+      font-size: 3.6rem;
+      letter-spacing: 0.0525em;
       text-transform: uppercase;
       border-radius: 8px;
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
-      min-width: 220px;
-      justify-content: center;
     }
     
     .collection-nav-btn::before {
@@ -270,8 +272,13 @@ layout: default
     }
     
     .nav-arrow {
-      font-size: 2rem;
+      font-size: 3.6rem;
       font-weight: 700;
+      line-height: 1;
+    }
+    
+    .nav-text {
+      line-height: 1;
     }
     
     @media (max-width: 768px) {
@@ -283,9 +290,12 @@ layout: default
       .collection-nav-btn {
         width: 90%;
         max-width: 400px;
-        justify-content: center;
-        font-size: 1.3rem;
-        padding: 18px 30px;
+        height: 102px;
+        font-size: 2.88rem;
+      }
+      
+      .nav-arrow {
+        font-size: 2.88rem;
       }
     }
   </style>
