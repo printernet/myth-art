@@ -70,7 +70,7 @@ h2.webgl-source{font-size:10rem;line-height:0.9;margin:0;display:block}
 .masthead .page-heading{width:100%}
 .masthead .webgl-text-root .subheading:not(.webgl-source){font-size:1.5rem;margin-top:0.5rem}
 /* Ensure the canvas doesn't cause the body to overflow on mobile */
-html,body{height:100%}
+html,body{height:auto}
 header.masthead{overflow:hidden}
 
 /* Inline/root variant for small elements like navbar-brand */
