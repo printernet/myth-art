@@ -57,7 +57,7 @@ permalink: /collections/
   
   .collection-card-title {
     font-family: 'HUMANE', system-ui, -apple-system, sans-serif;
-    font-size: 2.5rem;
+    font-size: 7.5rem;
     font-weight: 100;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -82,7 +82,7 @@ permalink: /collections/
     }
     
     .collection-card-title {
-      font-size: 2rem;
+      font-size: 6rem;
       letter-spacing: 0.08em;
     }
     
@@ -91,17 +91,72 @@ permalink: /collections/
     }
   }
   
-  .lead {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.9);
+  .collections-knockout-title {
+    font-family: 'HUMANE', system-ui, -apple-system, sans-serif;
+    font-size: 8rem;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f4bbff;
     text-align: center;
+    margin-top: -120px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 10;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+  }
+  
+  .lead {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .collections-knockout-title {
+      font-size: 4rem;
+      margin-top: -60px;
+    }
+  }
+  
+  .about-artwork {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #f4bbff;
+    border-radius: 8px;
+  }
+  
+  .about-artwork h3 {
+    font-family: 'HUMANE', system-ui, -apple-system, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 100;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f4bbff;
     margin-bottom: 20px;
   }
+  
+  .about-artwork p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 2px 2px 0 #000;
+  }
+  
+  @media (max-width: 768px) {
+    .about-artwork {
+      padding: 30px 20px;
+      margin: 40px 20px;
+    }
+    
+    .about-artwork h3 {
+      font-size: 2rem;
     }
   }
 </style>
+
+<h3 class="collections-knockout-title">Collections</h3>
 
 <p class="lead">Explore curated collections of original artwork across multiple themes and styles.</p>
 
@@ -138,3 +193,8 @@ permalink: /collections/
     </div>
   </a>
 </div>
+
+<aside class="about-artwork">
+  <h3>About the Artwork</h3>
+  <p>All artwork unless otherwise noted is created on Strathmore Mixed Media Vellum, a heavyweight, archival paper whose softly textured surface invites both precision and fluidity. The vellum tooth holds ink, watercolor, and layered media with equal grace, allowing pigments to settle, bloom, and grip in ways that feel organic and intentional. Every piece was created on Maui, Hawai'i, shaped by the island's light, air, and quiet sense of movement.</p>
+</aside>
