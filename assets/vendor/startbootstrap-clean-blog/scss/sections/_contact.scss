@@ -70,3 +70,10 @@
 form .form-group:first-child .floating-label-form-group {
     border-top: 1px solid $gray-300;
 }
+
+// Contact page specific masthead background positioning
+.page-contact {
+    header.masthead {
+        background-position: center top !important;
+    }
+}

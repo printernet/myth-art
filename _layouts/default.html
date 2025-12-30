@@ -4,7 +4,7 @@
 
 {% include head.html %}
 
-<body>
+<body{% if page.page_class %} class="{{ page.page_class }}"{% endif %}>
 
   {% include navbar.html %}
 
