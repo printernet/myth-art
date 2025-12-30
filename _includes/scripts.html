@@ -1,21 +1,21 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{"/assets/vendor/startbootstrap-clean-blog/js/scripts.js" | relative_url }}"></script>
+<script src="{{"/assets/vendor/startbootstrap-clean-blog/js/scripts.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
-<script src="{{"/assets/scripts.js" | relative_url }}"></script>
+<script src="{{"/assets/scripts.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 <!-- WebGL/text-effect initializer (canvas-based fallback) -->
-<script src="{{"/assets/vendor/webgl-text/webgl-text-init.js" | relative_url }}"></script>
+<script src="{{"/assets/vendor/webgl-text/webgl-text-init.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <!-- Scroll-variant WebGL shader effect (pink, wiggle only when scrolling) -->
-<script src="{{"/assets/vendor/webgl-text/webgl-text-scroll.js" | relative_url }}"></script>
+<script src="{{"/assets/vendor/webgl-text/webgl-text-scroll.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <!-- Green-variant WebGL shader effect (green, always wavy, random RGB bursts) -->
-<script src="{{"/assets/vendor/webgl-text/webgl-text-green.js" | relative_url }}"></script>
+<script src="{{"/assets/vendor/webgl-text/webgl-text-green.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 <!-- Pink RGB overlay for green-variant (continuous RGB shift) -->
-<script src="{{"/assets/vendor/webgl-text/webgl-text-pink-rgb.js" | relative_url }}"></script>
+<script src="{{"/assets/vendor/webgl-text/webgl-text-pink-rgb.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 
 {% if page.url contains 'contact' %}
   <!-- Form Validation -->
-  <script src="{{"/assets/vendor/startbootstrap-clean-blog/js/jqBootstrapValidation.js" | relative_url }}"></script>
+  <script src="{{"/assets/vendor/startbootstrap-clean-blog/js/jqBootstrapValidation.js" | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   <!-- Send Form -->
   <script>
     $(function () {
