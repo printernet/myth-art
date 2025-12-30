@@ -117,7 +117,7 @@
         var txt = (el.textContent || "").trim();
         var cs = getComputedStyle(el);
         var fs = parseFloat(cs.fontSize) || 48;
-        fs = fs * 2.0;
+        fs = fs * 3.5;
         var fw = "100";
         lines.push({ text: txt, fontSize: fs * DPR, fontWeight: fw });
         totalH += fs * DPR + gap;

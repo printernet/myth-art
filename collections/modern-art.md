@@ -57,10 +57,10 @@ images:
   - url: /img/collections/modern-art/TV Splatter. sharpie, Ink. 18x24 $10,000.jpeg
     title: "TV Splatter"
     description: "sharpie, Ink. 18x24 $10,000"
-  - url: /img/collections/modern-art/Was it all about my face? Spray Paint. 18x24 $3,000.jpeg
+  - url: /img/collections/modern-art/Was it all about my face Spray Paint. 18x24 $3,000.jpeg
     title: "Was it all about my face?"
     description: "Spray Paint. 18x24 $3,000"
-  - url: /img/collections/modern-art/What if ? Sharpie, Acrylic. 18x24 $15,000.jpeg
+  - url: /img/collections/modern-art/What if Sharpie, Acrylic. 18x24 $15,000.jpeg
     title: "What if ?"
     description: "Sharpie, Acrylic. 18x24 $15,000"
 ---

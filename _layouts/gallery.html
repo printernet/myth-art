@@ -9,13 +9,17 @@ layout: default
   <header class="masthead">
     {% endif %}
     <div class="overlay"></div>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="col-12">
           <div class="page-heading">
-            <h1 class="green-variant">{{ page.title }}</h1>
+            <div class="webgl-text-root green-variant">
+              <h1 class="webgl-source">{{ page.title }}</h1>
+            </div>
             {% if page.description %}
-            <span class="subheading">{{ page.description }}</span>
+            <div class="webgl-text-root-rgb" style="margin-top: 20px; min-height: 120px;">
+              <span class="subheading webgl-source" style="font-size: 48px;">{{ page.description }}</span>
+            </div>
             {% endif %}
           </div>
         </div>
@@ -25,9 +29,20 @@ layout: default
 
   <!-- Main Content -->
   <article>
-    <div class="container">
+    <h3 style="font-family: 'Humane', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; 
+                font-weight: 100; 
+                font-size: 8rem; 
+                color: #f4bbff; 
+                text-align: center; 
+                margin-top: -120px; 
+                margin-bottom: 60px; 
+                letter-spacing: 0.15em; 
+                text-transform: uppercase;
+                position: relative;
+                z-index: 10;">{{ page.title }}</h3>
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-10 col-md-12 mx-auto">
+        <div class="col-12">
           {{ content }}
           
           <!-- Gallery Grid -->
@@ -75,23 +90,29 @@ layout: default
     
     .gallery-item {
       position: relative;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 4px;
-      display: block;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background: #000;
+      transition: transform 0.3s ease;
     }
     
     .gallery-item:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     
     .gallery-item img {
       width: 100%;
       height: auto;
       display: block;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    
+    .gallery-item:hover img {
+      opacity: 0.9;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     
     .gallery-item:hover img {
