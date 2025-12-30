@@ -1,5 +1,5 @@
 ---
-background: /img/hero/shawn-holley-03.jpg
+background: /img/hero/shawn-holley-12.jpg
 layout: page
 title: "Collections"
 permalink: /collections/
@@ -13,7 +13,7 @@ permalink: /collections/
     margin-top: 40px;
     margin-bottom: 60px;
   }
-  
+
   .collection-card {
     position: relative;
     overflow: hidden;
@@ -22,102 +22,103 @@ permalink: /collections/
     display: block;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
-  
+
   .collection-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   }
-  
+
   .collection-card-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
-  
+
   .collection-card:hover .collection-card-image {
     transform: scale(1.05);
   }
-  
+
   .collection-card-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
     padding: 30px 20px 20px;
     transition: padding 0.3s ease;
   }
-  
+
   .collection-card:hover .collection-card-overlay {
     padding: 40px 20px 30px;
   }
-  
+
   .collection-card-title {
-    font-family: 'HUMANE', system-ui, -apple-system, sans-serif;
+    font-family: "HUMANE", system-ui, -apple-system, sans-serif;
     font-size: 7.5rem;
     font-weight: 100;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: #f4bbff;
     margin: 0 0 10px 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
-  
+
   .collection-card-count {
-    font-family: 'Nunito', sans-serif;
+    font-family: "Nunito", sans-serif;
     font-size: 1.1rem;
     font-weight: 400;
-    color: #2CFF05;
+    color: #2cff05;
     margin: 0;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
   }
-  
+
   @media (max-width: 768px) {
     .collections-grid {
       grid-template-columns: 1fr;
       gap: 20px;
     }
-    
+
     .collection-card-title {
       font-size: 6rem;
       letter-spacing: 0.08em;
     }
-    
+
     .collection-card-count {
       font-size: 1rem;
     }
   }
-  
+
   .collections-knockout-title {
-    font-family: 'HUMANE', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-    font-size: 8rem;
+    font-family: "HUMANE", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+      sans-serif;
     font-weight: 100;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    font-size: 8rem;
     color: #f4bbff;
     text-align: center;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     margin-top: -120px;
     margin-bottom: 60px;
     position: relative;
     z-index: 10;
-    text-shadow: none;
   }
-  
+
   .lead {
     font-size: 1.5rem;
     text-align: center;
   }
-  
+
   @media (max-width: 768px) {
     .collections-knockout-title {
-      font-size: 4rem;
-      margin-top: -60px;
+      font-size: 7rem;
+      letter-spacing: 0.12em;
+      margin-top: -120px;
     }
   }
-  
+
   .about-artwork {
     max-width: 800px;
     margin: 60px auto;
@@ -126,9 +127,9 @@ permalink: /collections/
     border-left: 4px solid #f4bbff;
     border-radius: 8px;
   }
-  
+
   .about-artwork h3 {
-    font-family: 'HUMANE', system-ui, -apple-system, sans-serif;
+    font-family: "HUMANE", system-ui, -apple-system, sans-serif;
     font-size: 2.5rem;
     font-weight: 100;
     letter-spacing: 0.1em;
@@ -136,57 +137,72 @@ permalink: /collections/
     color: #f4bbff;
     margin-bottom: 20px;
   }
-  
+
   .about-artwork p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
     text-shadow: 2px 2px 0 #000;
   }
-  
+
   @media (max-width: 768px) {
     .about-artwork {
       padding: 30px 20px;
       margin: 40px 20px;
     }
-    
+
     .about-artwork h3 {
       font-size: 2rem;
     }
   }
 </style>
 
-<h3 style="font-family: 'Humane', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; font-weight: 100; font-size: 8rem; color: #f4bbff; text-align: center; margin-top: -120px; margin-bottom: 60px; letter-spacing: 0.15em; text-transform: uppercase; position: relative; z-index: 10;">Collections</h3>
+<h3 class="collections-knockout-title">Collections</h3>
 
-<p class="lead">Explore curated collections of original artwork across multiple themes and styles.</p>
+<p class="lead">
+  Explore curated collections of original artwork across multiple themes and
+  styles.
+</p>
 
 <div class="collections-grid">
   <a href="/collections/birds/" class="collection-card">
-    <img src="/img/collections/birds/Piper at Sunrise. Sharpie, Watercolors. 18x24 $5,000.jpeg" alt="Birds Collection" class="collection-card-image">
+    <img
+      src="/img/collections/birds/Piper at Sunrise. Sharpie, Watercolors. 18x24 $5,000.jpeg"
+      alt="Birds Collection"
+      class="collection-card-image" />
     <div class="collection-card-overlay">
       <h2 class="collection-card-title">Birds</h2>
       <p class="collection-card-count">21 Pieces</p>
     </div>
   </a>
-  
+
   <a href="/collections/modern-art/" class="collection-card past-works-card">
-    <img src="/img/collections/modern-art/TV Eyes. Ink. 18x24 $10,000.jpeg" alt="Modern Art Collection" class="collection-card-image">
+    <img
+      src="/img/collections/modern-art/TV Eyes. Ink. 18x24 $10,000.jpeg"
+      alt="Modern Art Collection"
+      class="collection-card-image" />
     <div class="collection-card-overlay">
       <h2 class="collection-card-title">Modern Art</h2>
       <p class="collection-card-count">19 Pieces</p>
     </div>
   </a>
-  
+
   <a href="/collections/past-works/" class="collection-card">
-    <img src="/img/collections/past-works/Past Works 1.jpeg" alt="Past Works Collection" class="collection-card-image">
+    <img
+      src="/img/collections/past-works/Past Works 1.jpeg"
+      alt="Past Works Collection"
+      class="collection-card-image" />
     <div class="collection-card-overlay">
       <h2 class="collection-card-title">Past Works</h2>
       <p class="collection-card-count">15 Pieces</p>
     </div>
   </a>
-  
+
   <a href="/collections/sets/" class="collection-card">
-    <img src="/img/collections/sets/Set of 3. (1) Acrylic. 18x24 $30,000.jpeg" alt="Sets Collection" class="collection-card-image">
+    <img
+      src="/img/collections/sets/Set of 3. (1) Acrylic. 18x24 $30,000.jpeg"
+      alt="Sets Collection"
+      class="collection-card-image" />
     <div class="collection-card-overlay">
       <h2 class="collection-card-title">Sets</h2>
       <p class="collection-card-count">7 Pieces</p>
@@ -196,5 +212,12 @@ permalink: /collections/
 
 <aside class="about-artwork">
   <h3>About the Artwork</h3>
-  <p>All artwork unless otherwise noted is created on Strathmore Mixed Media Vellum, a heavyweight, archival paper whose softly textured surface invites both precision and fluidity. The vellum tooth holds ink, watercolor, and layered media with equal grace, allowing pigments to settle, bloom, and grip in ways that feel organic and intentional. Every piece was created on Maui, Hawai'i, shaped by the island's light, air, and quiet sense of movement.</p>
+  <p>
+    All artwork unless otherwise noted is created on Strathmore Mixed Media
+    Vellum, a heavyweight, archival paper whose softly textured surface invites
+    both precision and fluidity. The vellum tooth holds ink, watercolor, and
+    layered media with equal grace, allowing pigments to settle, bloom, and grip
+    in ways that feel organic and intentional. Every piece was created on Maui,
+    Hawai'i, shaped by the island's light, air, and quiet sense of movement.
+  </p>
 </aside>

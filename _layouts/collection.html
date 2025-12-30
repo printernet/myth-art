@@ -2,14 +2,23 @@
 layout: page
 ---
 
-<header class="collection-header" style="background-image: url('{{ page.header_image | default: '' }}')">
+<header
+  class="collection-header"
+  {%
+  if
+  page.header_image
+  %}
+  style="background-image: url('{{ page.header_image }}')"
+  {%
+  endif
+  %}>
   <div class="overlay"></div>
   <div class="container">
     <h1>{{ page.title }}</h1>
-    {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+    {% if page.description %}
+    <p class="lead">{{ page.description }}</p>
+    {% endif %}
   </div>
 </header>
 
-<div class="container collection-content">
-  {{ content }}
-</div>
+<div class="container collection-content">{{ content }}</div>
