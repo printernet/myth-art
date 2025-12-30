@@ -1,0 +1,120 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+{% if page.background %}
+<header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
+  {% else %}
+  <header class="masthead">
+    {% endif %}
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="page-heading">
+            <h1 class="green-variant">{{ page.title }}</h1>
+            {% if page.description %}
+            <span class="subheading">{{ page.description }}</span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 col-md-12 mx-auto">
+          {{ content }}
+          
+          <!-- Gallery Grid -->
+          <div class="gallery-grid">
+            {% for image in page.images %}
+            <a href="{{ image.url }}" class="glightbox gallery-item" data-gallery="collection" 
+               data-title="{{ image.title }}" data-description="{{ image.description }}">
+              <img src="{{ image.url }}" alt="{{ image.title }}" class="img-fluid">
+              {% if image.sold %}
+              <div class="sold-badge">SOLD</div>
+              {% endif %}
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+
+  <!-- GLightbox CSS -->
+  <link rel="stylesheet" href="{{ '/assets/vendor/glightbox.min.css' | relative_url }}">
+  
+  <!-- GLightbox JS -->
+  <script src="{{ '/assets/vendor/glightbox.min.js' | relative_url }}"></script>
+  <script>
+    const lightbox = GLightbox({
+      touchNavigation: true,
+      loop: true,
+      autoplayVideos: true,
+      zoomable: true,
+      draggable: true
+    });
+  </script>
+  
+  <style>
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      display: block;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: #000;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.3s ease;
+    }
+    
+    .gallery-item:hover img {
+      opacity: 0.9;
+    }
+    
+    .sold-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #DF00FE;
+      color: #fff;
+      padding: 5px 15px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 4px;
+      text-shadow: none;
+    }
+    
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+      }
+    }
+  </style>
