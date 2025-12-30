@@ -65,7 +65,7 @@ layout: default
               class="glightbox gallery-item"
               data-gallery="collection"
               data-title="{{ image.title }}"
-              data-description="{% if image.sold %}<div class='lightbox-sold-badge'>SOLD</div>{% else %}<a href='/contact.html' class='lightbox-own-button'>Own this</a>{% endif %}{{ image.description }}"
+              data-description="{% if page.title != 'Past Works' %}{% if image.sold %}<div class='lightbox-sold-badge'>SOLD</div>{% else %}<a href='/contact.html' class='lightbox-own-button'>Own this</a>{% endif %}{% endif %}{{ image.description }}"
               data-sold="{% if image.sold %}true{% else %}false{% endif %}">
               <img
                 src="{{ image.url }}"
