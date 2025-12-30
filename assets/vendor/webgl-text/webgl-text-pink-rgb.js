@@ -66,6 +66,15 @@
     canvas.style.height = "100%";
     canvas.style.pointerEvents = "none";
     canvas.style.zIndex = "3"; // Above green (1) and regular canvases (2)
+    
+    // Compress vertically on mobile for collection pages
+    var isCollectionPage = root.classList.contains('collection-page');
+    var isMobile = window.innerWidth <= 700;
+    if (isMobile && isCollectionPage) {
+      canvas.style.transform = "scaleY(0.6)";
+      canvas.style.transformOrigin = "center center";
+    }
+    
     if (getComputedStyle(root).position === "static")
       root.style.position = "relative";
     root.appendChild(canvas);
@@ -113,19 +122,64 @@
       var margin = 10 * DPR; // 10px margin on all sides for safety
       
       // Calculate dimensions
+      // Check if this is a collection page for tighter kerning
+      var isCollectionPage = root.classList.contains('collection-page');
+      // Check if mobile viewport
+      var isMobile = window.innerWidth <= 700;
+      
+      // Use container width constrained by parent - calculate before sources loop
+      var width = Math.max(64, Math.floor(rect.width * DPR));
+      
       sources.forEach(function (el) {
         var txt = (el.textContent || "").trim();
         var cs = getComputedStyle(el);
         var fs = parseFloat(cs.fontSize) || 48;
-        fs = fs * 3.5;
+        // Use smaller multiplier on mobile for collection pages
+        fs = fs * (isMobile && isCollectionPage ? 2.0 : 3.5);
         var fw = "100";
-        lines.push({ text: txt, fontSize: fs * DPR, fontWeight: fw });
-        totalH += fs * DPR + gap;
+        
+        // Word wrap on mobile for collection pages
+        if (isMobile && isCollectionPage) {
+          var words = txt.split(' ');
+          var wrappedLines = [];
+          var currentLine = '';
+          
+          // Measure font for word wrapping
+          tctx.font = fw + " " + (fs * DPR) + 'px "Humane", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
+          var letterSpacing = (fs * DPR) * 0.02;
+          var maxWidth = (width - margin * 2) * 0.9; // Use 90% of available width
+          
+          words.forEach(function(word) {
+            var testLine = currentLine ? currentLine + ' ' + word : word;
+            var testChars = testLine.toUpperCase().split("");
+            var testWidth = 0;
+            testChars.forEach(function(ch) {
+              testWidth += tctx.measureText(ch).width + letterSpacing;
+            });
+            
+            if (testWidth > maxWidth && currentLine) {
+              wrappedLines.push(currentLine);
+              currentLine = word;
+            } else {
+              currentLine = testLine;
+            }
+          });
+          
+          if (currentLine) {
+            wrappedLines.push(currentLine);
+          }
+          
+          // Add each wrapped line
+          wrappedLines.forEach(function(line) {
+            lines.push({ text: line, fontSize: fs * DPR, fontWeight: fw });
+            totalH += fs * DPR + gap;
+          });
+        } else {
+          lines.push({ text: txt, fontSize: fs * DPR, fontWeight: fw });
+          totalH += fs * DPR + gap;
+        }
       });
       if (lines.length) totalH -= gap;
-      
-      // Use container width constrained by parent
-      var width = Math.max(64, Math.floor(rect.width * DPR));
       
       // Calculate natural text width and scale factor
       var maxNaturalWidth = 0;
@@ -135,7 +189,7 @@
           " " +
           line.fontSize +
           'px "Humane", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif';
-        var letterSpacing = line.fontSize * 0.15;
+        var letterSpacing = line.fontSize * (isCollectionPage ? 0.02 : 0.15);
         var chars = line.text.toUpperCase().split("");
         var lineWidth = 0;
         chars.forEach(function (ch) {
@@ -169,7 +223,7 @@
         // Center within available width (accounting for margins)
         var x = margin + availableWidth / 2;
         var y = startY + scaledFontSize / 2;
-        var letterSpacing = scaledFontSize * 0.15;
+        var letterSpacing = scaledFontSize * (isCollectionPage ? 0.02 : 0.15);
         var chars = line.text.toUpperCase().split("");
         var totalWidth = 0;
         chars.forEach(function (ch) {

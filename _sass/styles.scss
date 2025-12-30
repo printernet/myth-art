@@ -1,2 +1,14 @@
 // Import Core Clean Blog SCSS
 @import "../assets/vendor/startbootstrap-clean-blog/scss/styles.scss";
+
+// Birds collection background positioning
+@media (max-width: 700px) {
+  .masthead.birds-collection {
+    background-position: right -125px top 125px !important;
+  }
+  
+  // Reduce navbar toggler padding on mobile to prevent wrapping
+  .navbar-toggler {
+    padding: 0.25rem 0.25rem !important;
+  }
+}

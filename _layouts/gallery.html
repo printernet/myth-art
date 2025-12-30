@@ -4,7 +4,9 @@ layout: default
 
 <!-- Page Header -->
 {% if page.background %}
-<header class="masthead" style="background-image: url('{{ page.background | prepend: site.baseurl | replace: '//', '/' }}')">
+<header
+  class="masthead {% if page.title == 'Birds' %}birds-collection{% endif %}"
+  style="background-image: url(&quot;{{ page.background | prepend: site.baseurl | replace: '//', '/' }}&quot;)">
   {% else %}
   <header class="masthead">
     {% endif %}
@@ -17,8 +19,12 @@ layout: default
               <h1 class="webgl-source">{{ page.title }}</h1>
             </div>
             {% if page.description %}
-            <div class="webgl-text-root-rgb" style="margin-top: 20px; min-height: 120px;">
-              <span class="subheading webgl-source" style="font-size: 48px;">{{ page.description }}</span>
+            <div
+              class="webgl-text-root-rgb collection-page"
+              style="margin-top: 20px; min-height: 120px">
+              <span class="subheading webgl-source" style="font-size: 48px"
+                >{{ page.description }}</span
+              >
             </div>
             {% endif %}
           </div>
@@ -29,28 +35,41 @@ layout: default
 
   <!-- Main Content -->
   <article>
-    <h3 style="font-family: 'Humane', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; 
-                font-weight: 100; 
-                font-size: 8rem; 
-                color: #f4bbff; 
-                text-align: center; 
-                margin-top: -120px; 
-                margin-bottom: 60px; 
-                letter-spacing: 0.15em; 
-                text-transform: uppercase;
-                position: relative;
-                z-index: 10;">{{ page.title }}</h3>
+    <h3
+      style="
+        font-family: 'Humane', system-ui, -apple-system, 'Segoe UI', Roboto,
+          Arial, sans-serif;
+        font-weight: 100;
+        font-size: 8rem;
+        color: #f4bbff;
+        text-align: center;
+        margin-top: -120px;
+        margin-bottom: 60px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 10;
+      ">
+      {{ page.title }}
+    </h3>
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
           {{ content }}
-          
+
           <!-- Gallery Grid -->
           <div class="gallery-grid">
             {% for image in page.images %}
-            <a href="{{ image.url }}" class="glightbox gallery-item" data-gallery="collection" 
-               data-title="{{ image.title }}" data-description="{{ image.description }}">
-              <img src="{{ image.url }}" alt="{{ image.title }}" class="img-fluid">
+            <a
+              href="{{ image.url }}"
+              class="glightbox gallery-item"
+              data-gallery="collection"
+              data-title="{{ image.title }}"
+              data-description="{{ image.description }}">
+              <img
+                src="{{ image.url }}"
+                alt="{{ image.title }}"
+                class="img-fluid" />
               {% if image.sold %}
               <div class="sold-badge">SOLD</div>
               {% endif %}
@@ -60,13 +79,55 @@ layout: default
         </div>
       </div>
     </div>
+    
+    <!-- Collection Navigation CTAs -->
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="collection-navigation">
+            {% assign collections = "Birds,Modern Art,Past Works,Sets" | split: "," %}
+            {% assign collection_urls = "/collections/birds/,/collections/modern-art/,/collections/past-works/,/collections/sets/" | split: "," %}
+            {% assign current_index = -1 %}
+            {% for collection in collections %}
+              {% if collection == page.title %}
+                {% assign current_index = forloop.index0 %}
+              {% endif %}
+            {% endfor %}
+            
+            <div class="nav-buttons">
+              {% if current_index > 0 %}
+                {% assign prev_index = current_index | minus: 1 %}
+                <a href="{{ collection_urls[prev_index] }}" class="collection-nav-btn prev-collection">
+                  <span class="nav-arrow">←</span>
+                  <span class="nav-text">Previous Collection</span>
+                </a>
+              {% endif %}
+              
+              <a href="/collections/" class="collection-nav-btn all-collections">
+                <span class="nav-text">View All Collections</span>
+              </a>
+              
+              {% if current_index >= 0 and current_index < 3 %}
+                {% assign next_index = current_index | plus: 1 %}
+                <a href="{{ collection_urls[next_index] }}" class="collection-nav-btn next-collection">
+                  <span class="nav-text">Next Collection</span>
+                  <span class="nav-arrow">→</span>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </article>
 
-  <hr>
+  <hr />
 
   <!-- GLightbox CSS -->
-  <link rel="stylesheet" href="{{ '/assets/vendor/glightbox.min.css' | relative_url }}">
-  
+  <link
+    rel="stylesheet"
+    href="{{ '/assets/vendor/glightbox.min.css' | relative_url }}" />
+
   <!-- GLightbox JS -->
   <script src="{{ '/assets/vendor/glightbox.min.js' | relative_url }}"></script>
   <script>
@@ -75,10 +136,10 @@ layout: default
       loop: true,
       autoplayVideos: true,
       zoomable: true,
-      draggable: true
+      draggable: true,
     });
   </script>
-  
+
   <style>
     .gallery-grid {
       display: grid;
@@ -87,7 +148,7 @@ layout: default
       margin-top: 40px;
       margin-bottom: 60px;
     }
-    
+
     .gallery-item {
       position: relative;
       display: flex;
@@ -96,34 +157,34 @@ layout: default
       border-radius: 4px;
       transition: transform 0.3s ease;
     }
-    
+
     .gallery-item:hover {
       transform: translateY(-5px);
     }
-    
+
     .gallery-item img {
       width: 100%;
       height: auto;
       display: block;
       transition: opacity 0.3s ease, box-shadow 0.3s ease;
       border-radius: 4px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
-    
+
     .gallery-item:hover img {
       opacity: 0.9;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
-    
+
     .gallery-item:hover img {
       opacity: 0.9;
     }
-    
+
     .sold-badge {
       position: absolute;
       top: 10px;
       right: 10px;
-      background: #DF00FE;
+      background: #df00fe;
       color: #fff;
       padding: 5px 15px;
       font-size: 14px;
@@ -131,11 +192,101 @@ layout: default
       border-radius: 4px;
       text-shadow: none;
     }
-    
+
     @media (max-width: 768px) {
       .gallery-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 15px;
       }
     }
+    
+    /* Collection Navigation CTAs */
+    .collection-navigation {
+      margin: 60px 0 40px;
+      padding: 40px 0;
+      border-top: 1px solid rgba(244, 187, 255, 0.2);
+    }
+    
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .collection-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 40px;
+      background: #000;
+      border: 3px solid #2CFF05;
+      color: #2CFF05;
+      text-decoration: none;
+      font-family: 'Humane', sans-serif;
+      font-weight: 100;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      min-width: 220px;
+      justify-content: center;
+    }
+    
+    .collection-nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: #2CFF05;
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+    
+    .collection-nav-btn:hover {
+      color: #000;
+      border-color: #2CFF05;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(44, 255, 5, 0.4);
+    }
+    
+    .collection-nav-btn:hover::before {
+      left: 0;
+    }
+    
+    .collection-nav-btn.all-collections {
+      border-color: #f4bbff;
+      color: #f4bbff;
+    }
+    
+    .collection-nav-btn.all-collections::before {
+      background: #f4bbff;
+    }
+    
+    .nav-arrow {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-buttons {
+        flex-direction: column;
+        gap: 20px;
+      }
+      
+      .collection-nav-btn {
+        width: 90%;
+        max-width: 400px;
+        justify-content: center;
+        font-size: 1.3rem;
+        padding: 18px 30px;
+      }
+    }
   </style>
+</header>
