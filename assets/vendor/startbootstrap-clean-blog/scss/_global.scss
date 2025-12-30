@@ -1,4 +1,8 @@
 // Global styling for this template
+html {
+    overflow-x: hidden;
+}
+
 body {
     font-size: 24px;
     color: #000000;
@@ -7,6 +11,9 @@ body {
     text-shadow: -2px 2px 0 #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
 }
 
 p {

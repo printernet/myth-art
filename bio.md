@@ -5,6 +5,18 @@ title: "Bio"
 permalink: /bio/
 ---
 
+<style>
+  .col-lg-8 {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  
+  .webgl-text-root-rgb {
+    max-width: 100%;
+    overflow: hidden;
+  }
+</style>
+
 <div class="webgl-text-root-rgb">
   <h2 class="webgl-source">Shawn Holley</h2>
 </div>
