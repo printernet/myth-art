@@ -21,3 +21,14 @@
 .masthead.past-works-collection > * {
   transform: scaleX(-1);
 }
+
+// Sets collection - align background to top
+.masthead.sets-collection {
+  background-position: center -200px !important;
+}
+
+@media (max-width: 1000px) {
+  .masthead.sets-collection {
+    background-position: center top !important;
+  }
+}
