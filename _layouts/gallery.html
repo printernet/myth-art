@@ -240,6 +240,19 @@ layout: default
     .gslide-desc {
       text-align: left;
     }
+    
+    /* Ensure consistent styling on all screen sizes */
+    @media (max-width: 768px) {
+      .lightbox-sold-badge,
+      .lightbox-own-button {
+        float: right;
+        display: inline-block;
+      }
+      
+      .gslide-desc {
+        text-align: left;
+      }
+    }
 
     @media (max-width: 768px) {
       .gallery-grid {
