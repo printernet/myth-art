@@ -65,8 +65,9 @@ layout: default
               class="glightbox gallery-item"
               data-gallery="collection"
               data-title="{{ image.title }}"
-              data-description="{% if page.title != 'Past Works' %}{% if image.sold %}<div class='lightbox-sold-badge'>SOLD</div>{% else %}<a href='/contact.html' class='lightbox-own-button'>Own this</a>{% endif %}{% endif %}{{ image.description }}"
-              data-sold="{% if image.sold %}true{% else %}false{% endif %}">
+              data-description="{{ image.description }}"
+              data-sold="{% if image.sold %}true{% else %}false{% endif %}"
+              data-show-actions="{% if page.title != 'Past Works' %}true{% else %}false{% endif %}">
               <img
                 src="{{ image.url }}"
                 alt="{{ image.title }}"
@@ -139,6 +140,43 @@ layout: default
       zoomable: true,
       draggable: true,
     });
+    
+    lightbox.on('slide_after_load', (data) => {
+      const { slideNode, trigger } = data;
+      if (!trigger) return;
+      
+      const showActions = trigger.getAttribute('data-show-actions') === 'true';
+      const isSold = trigger.getAttribute('data-sold') === 'true';
+      
+      // Find the description container
+      const descContainer = slideNode.querySelector('.gslide-description');
+      if (!descContainer) return;
+      
+      // Check if already processed
+      if (descContainer.querySelector('.lightbox-actions-container')) return;
+      
+      // Create actions container for bottom-right placement
+      const actionsContainer = document.createElement('div');
+      actionsContainer.className = 'lightbox-actions-container';
+      
+      if (showActions) {
+        if (isSold) {
+          const badge = document.createElement('div');
+          badge.className = 'lightbox-sold-badge';
+          badge.textContent = 'SOLD';
+          actionsContainer.appendChild(badge);
+        } else {
+          const button = document.createElement('a');
+          button.href = '/contact.html';
+          button.className = 'lightbox-own-button';
+          button.textContent = 'Own this';
+          actionsContainer.appendChild(button);
+        }
+      }
+      
+      // Append actions container to description
+      descContainer.appendChild(actionsContainer);
+    });
   </script>
 
   <style>
@@ -194,6 +232,50 @@ layout: default
       text-shadow: none;
     }
     
+    /* Lightbox description container - horizontal flex layout */
+    .gslide-description {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      padding: 20px 30px !important;
+      background: #fff !important;
+      color: #212529 !important;
+    }
+    
+    /* Left side: title and description */
+    .gdesc-inner {
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    
+    /* Title - upper left, slightly bigger than body */
+    .gslide-title {
+      font-size: 1.35rem !important;
+      font-weight: 600 !important;
+      color: #212529 !important;
+      margin: 0 0 8px 0 !important;
+      text-align: left !important;
+      text-shadow: none !important;
+    }
+    
+    /* Description - body text style, left aligned */
+    .gslide-desc {
+      font-size: 1rem !important;
+      line-height: 1.5 !important;
+      color: #212529 !important;
+      text-align: left !important;
+      margin: 0 !important;
+      text-shadow: none !important;
+    }
+    
+    /* Actions container - right side */
+    .lightbox-actions-container {
+      flex-shrink: 0 !important;
+      margin-left: 20px !important;
+    }
+    
     /* Lightbox SOLD badge */
     .lightbox-sold-badge {
       display: inline-block;
@@ -204,8 +286,6 @@ layout: default
       font-weight: bold;
       border-radius: 6px;
       text-shadow: none;
-      margin-bottom: 15px;
-      float: right;
     }
     
     /* Lightbox "Own this" button */
@@ -224,9 +304,6 @@ layout: default
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 15px rgba(44, 255, 5, 0.4);
-      margin-top: 15px;
-      margin-bottom: 15px;
-      float: right;
     }
     
     .lightbox-own-button:hover {
@@ -236,21 +313,62 @@ layout: default
       box-shadow: 0 6px 20px rgba(244, 187, 255, 0.6);
     }
     
-    /* Style the description container */
-    .gslide-desc {
-      text-align: left;
-    }
-    
-    /* Ensure consistent styling on all screen sizes */
+    /* Mobile - black background, white text */
     @media (max-width: 768px) {
-      .lightbox-sold-badge,
-      .lightbox-own-button {
-        float: right;
-        display: inline-block;
+      /* Force the slide container to not split 50/50 */
+      .gslide-inner-content {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      
+      .gslide-media {
+        flex: 1 1 auto !important;
+        max-height: none !important;
+      }
+      
+      .gslide-description {
+        flex: 0 0 auto !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        height: auto !important;
+        max-height: none !important;
+        background: #000 !important;
+        color: #fff !important;
+        padding: 12px 15px !important;
+        min-height: auto !important;
+      }
+      
+      .gdesc-inner {
+        flex: 1 !important;
+      }
+      
+      .gslide-title {
+        color: #fff !important;
+        font-size: 1.1rem !important;
+        margin-bottom: 4px !important;
+        text-shadow: none !important;
       }
       
       .gslide-desc {
-        text-align: left;
+        color: #fff !important;
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        text-shadow: none !important;
+      }
+      
+      .lightbox-actions-container {
+        flex-shrink: 0 !important;
+        margin-left: 15px !important;
+      }
+      
+      .lightbox-own-button {
+        font-size: 20px;
+        padding: 8px 20px;
+      }
+      
+      .lightbox-sold-badge {
+        font-size: 14px;
+        padding: 6px 16px;
       }
     }
 
